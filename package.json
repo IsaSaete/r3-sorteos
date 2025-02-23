@@ -1,11 +1,12 @@
 {
-  "name": "launch-giveaways",
+  "name": "prueba1",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "watch": "tsc --watch",
     "start": "node .",
     "clean-data": "rm data/data.json"
   },
