@@ -18,3 +18,15 @@ export const loginUser = (email: string, password: string): void => {
   saveData();
   console.log("Usuario registrado con exito");
 };
+
+export const createGiveaway = (): void => {
+  const giveawayData = askUserNewGiveawayData();
+
+  programData.giveaways.push({
+    name: giveawayData.giveawayName,
+    socialNetwork: giveawayData.giveawaySocialNetwork,
+    participants: [],
+  });
+  console.log("El sorteo se ha registrado con éxito");
+};
+saveData();
