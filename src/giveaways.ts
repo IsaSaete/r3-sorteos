@@ -1,7 +1,7 @@
 import { askUser } from "./askUser.js";
 import { programData, saveData } from "./storage.js";
 
-import { Giveaway } from "./types.js";
+import { Giveaway, User } from "./types.js";
 import { askUserNewGiveawayData } from "./ui.js";
 export const loginUser = (email: string, password: string): void => {
   const validateLogin = programData.users.find(
@@ -48,12 +48,30 @@ export const listGiveaways = (): void => {
   }
 };
 
-export const deleteGiveaway = (giveawayNumber: number): void => {
-  if (giveawayNumber < 0 || giveawayNumber > programData.giveaways.length) {
+export const deleteGiveaway = (giveawayDeleteNumber: number): void => {
+  if (
+    giveawayDeleteNumber < 0 ||
+    giveawayDeleteNumber > programData.giveaways.length
+  ) {
     console.log("¡Este sorteo no existe!");
   } else {
-    programData.giveaways.splice(giveawayNumber - 1, 1);
+    programData.giveaways.splice(giveawayDeleteNumber - 1, 1);
     console.log("¡Sorteo eliminado con éxito!");
   }
   saveData();
+};
+
+export const enterGiveaway = (giveawayNumber: number): void => {
+  if (giveawayNumber < 0 || giveawayNumber > programData.giveaways.length) {
+    console.log("¡Este sorteo no existe!");
+  } else {
+    const giveawaysChoosed = programData.giveaways[giveawayNumber - 1];
+    const userLoged = programData.users.find(
+      (user) => user.email === programData.userEmail
+    );
+
+    giveawaysChoosed.participants.push(userLoged!);
+    saveData();
+    console.log(`¡Te has inscrito con éxito al sorteo ${giveawaysChoosed}`);
+  }
 };
