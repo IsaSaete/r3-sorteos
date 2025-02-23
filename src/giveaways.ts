@@ -72,6 +72,31 @@ export const enterGiveaway = (giveawayNumber: number): void => {
 
     giveawaysChoosed.participants.push(userLoged!);
     saveData();
-    console.log(`¡Te has inscrito con éxito al sorteo ${giveawaysChoosed}`);
+    console.log(
+      `¡Te has inscrito con éxito al sorteo ${giveawaysChoosed.name}`
+    );
+  }
+};
+export const listUserGiveaways = (): void => {
+  const userLoged = programData.userEmail;
+  const allGiveaways = programData.giveaways;
+  const userGiveaways = allGiveaways.filter((giveaways) =>
+    giveaways.participants.some(
+      (participant) => participant.email === userLoged
+    )
+  );
+  if (userGiveaways.length) {
+    console.log(
+      `\nEstas inscrito en los siguientes ${userGiveaways.length} sorteos:\n`
+    );
+    userGiveaways.forEach((userGiveaways, index) => {
+      console.log(
+        `${index + 1}. Sorteo de un ${userGiveaways.name} que se realiza en ${
+          userGiveaways.socialNetwork
+        }.`
+      );
+    });
+  } else {
+    console.log("No estás inscrito en ningún sorteo");
   }
 };
