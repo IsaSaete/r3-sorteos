@@ -20,13 +20,12 @@ export const loginUser = (email: string, password: string): void => {
 };
 
 export const createGiveaway = (): void => {
-  const giveawayData = askUserNewGiveawayData();
-
+  const result = askUserNewGiveawayData();
   programData.giveaways.push({
-    name: giveawayData.giveawayName,
-    socialNetwork: giveawayData.giveawaySocialNetwork,
+    name: result.giveawayName,
+    socialNetwork: result.giveawaySocialNetwork,
     participants: [],
   });
   console.log("El sorteo se ha registrado con éxito");
+  saveData();
 };
-saveData();
