@@ -26,14 +26,14 @@ export const createGiveaway = (): void => {
     socialNetwork: giveawayData.giveawaySocialNetwork,
     participants: [],
   });
-  console.log(programData.giveaways);
+
   console.log("El sorteo se ha registrado con éxito");
   saveData();
 };
 
 export const listGiveaways = (): void => {
   if (programData.giveaways.length === 0) {
-    console.log("Actualmente, no hay sorteos disponibles");
+    console.log("\nActualmente, no hay sorteos disponibles");
   } else {
     console.log(
       `\nÉstos son los ${programData.giveaways.length} sorteos disponibles:\n`
@@ -46,4 +46,14 @@ export const listGiveaways = (): void => {
       )
     );
   }
+};
+
+export const deleteGiveaway = (giveawayNumber: number): void => {
+  if (giveawayNumber < 0 || giveawayNumber > programData.giveaways.length) {
+    console.log("¡Este sorteo no existe!");
+  } else {
+    programData.giveaways.splice(giveawayNumber - 1, 1);
+    console.log("¡Sorteo eliminado con éxito!");
+  }
+  saveData();
 };
